@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".VistaActivity">
-
-
 
         <TextView
             android:id="@+id/TextViewNombre"
@@ -20,8 +19,6 @@
             android:layout_height="wrap_content"
             android:text="Edad"/>
 
-
-
         <TextView
             android:id="@+id/TextViewTelefono"
             android:layout_width="match_parent"
@@ -33,6 +30,10 @@
             android:layout_height="wrap_content"
             android:text="Email"/>
 
-
+        <Button
+            android:id="@+id/btnCerrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cerrar"/>
 
 </LinearLayout>
