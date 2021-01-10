@@ -1,5 +1,6 @@
 package com.example.crudsqlite;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -23,14 +24,14 @@ public class daoContacto {
 
     //Tabla sobre la que operamos dentro de nuestra BBDD
     String nombreTabla = "CREATE TABLE IF NOT EXISTS " +
-            "Contacto(id integer primary key autoincrement, nombre text, telefono text, email text, edad integer)";
+            "contacto(id integer primary key autoincrement, nombre text, telefono text, email text, edad integer)";
 
     /*CONSTRUCTOR*/
     public daoContacto(Context c){
         this.miContexto = c;
 
         /*Definimos la conexión a la base de datos*/
-        cx = c.openOrCreateDatabase(nombreBBDD, miContexto.MODE_WORLD_WRITEABLE,null);
+        cx = c.openOrCreateDatabase(nombreBBDD, miContexto.MODE_PRIVATE,null);
 
         //Creación de la tabla
         cx.execSQL(nombreTabla);
@@ -40,7 +41,16 @@ public class daoContacto {
     /*RESTO DE MÉTODOS PARA ESTA CLASE INSERTAR, ELIMINAR, EDITAR, LISTADO*/
     /*INSERTAR*/
     public boolean Insertar(Contacto c){
-        return  true;
+        ContentValues valores = new ContentValues();
+
+        valores.put("nombre", c.getNombre());
+        valores.put("email", c.getEmail());
+        valores.put("telefono", c.getTelefono());
+        valores.put("edad", c.getEdad());
+
+        //El método insert devuelve un entero largo, comprobamos si este es >0
+        return (cx.insert("contacto", null,valores))>0;
+
     }
 
     /*ELIMINAR*/
